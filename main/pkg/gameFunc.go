@@ -8,7 +8,8 @@ import (
 )
 
 var db, err = sql.Open("mysql", "root:AdmPass1234@/gogame")
-var PlayerCounter = 0
+var CurrentPlayer = 0
+var OppositePlayer = 1
 
 func main(){
 	fmt.Println("Hello")
@@ -21,16 +22,19 @@ func main(){
 }
 
 func Game(AttackingPlayer types.Hero, DeffendingPlayer types.Hero)types.OutputMessage {
-	
-	if PlayerCounter == 0 {
-		PlayerCounter++
+	if CurrentPlayer == 0 {
+		CurrentPlayer++
+		OppositePlayer--
 	} else {
-		PlayerCounter--
+		CurrentPlayer--
+		OppositePlayer++
 	}
 
 	return types.OutputMessage{
 		Message: "Attacking player is " + AttackingPlayer.Name + " Defending player is " + DeffendingPlayer.Name + "." ,
-		PlayerCounter: PlayerCounter ,
+		CurrentPlayer: CurrentPlayer ,
+		OppositePlayer: OppositePlayer ,
 	}
 }
+
 

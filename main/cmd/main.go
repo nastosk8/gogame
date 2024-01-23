@@ -15,16 +15,10 @@ func main() {
 }
 
 func callHanlder(webServerContext *gin.Context) {
-	Oppositeplayer := 1
-	if gameFunc.PlayerCounter == 0 {
-		Oppositeplayer = 1
-	}else {
-		Oppositeplayer = 0
-	}
-	result := gameFunc.Game(data.AllPlayers[gameFunc.PlayerCounter], data.AllPlayers[Oppositeplayer])
+	result := gameFunc.Game(data.AllPlayers[gameFunc.CurrentPlayer], data.AllPlayers[gameFunc.OppositePlayer])
 	webServerContext.JSON(http.StatusOK, gin.H{
-		"message": result.Message,
-		"playerCounter": result.PlayerCounter,
-		"OppositePlayerCounter": Oppositeplayer,
+		"Message": result.Message,
+		"PlayerCounter": result.CurrentPlayer,
+		"OppositePlayer": result.OppositePlayer,
 	  })
 }
