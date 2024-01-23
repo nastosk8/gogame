@@ -1,0 +1,55 @@
+package main
+
+import "fmt"
+
+type User struct {
+    Being
+    Name    string
+    Surname string
+    Age     int
+}
+
+type Animal struct {
+    Being
+    Name string
+    Age  int
+}
+
+func main() {
+    user := New()
+    animal := NewAnimal()
+
+    PrintFullName(&animal)
+    PrintFullName(&user)
+}
+
+type Being interface {
+    GetFullName() string
+}
+
+func New() User {
+    return User{
+        Name:    "John",
+        Surname: "Doe",
+        Age:     25,
+    }
+}
+
+func NewAnimal() Animal {
+    return Animal{
+        Name: "Dog",
+        Age:  5,
+    }
+}
+
+func (u *User) GetFullName() string {
+    return u.Name + " " + u.Surname
+}
+
+func (a *Animal) GetFullName() string {
+    return a.Name
+}
+
+func PrintFullName(being Being) {
+    fmt.Println(being.GetFullName())
+}
