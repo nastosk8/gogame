@@ -1,13 +1,18 @@
 package types
 
+type OutputMessage struct {
+	Message string
+	PlayerCounter int
+}
+
 type Class struct {
-	name string
-	damage_type string
-	health int
-	mana int
+	Name       string
+	DamageType string
+	Health     int
+	Mana       int
 }
 
 type Hero struct {
-	name string
-	class Class
+	Name  string
+	Class Class
 }
